@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bobby Photography</title>
+  <style>
+    :root{
+      --gold:#c89a3a;
+      --gold-2:#f2c94c;
+      --bg:#ffffff;
+      --text:#111;
+      --muted:#666;
+      --maxwidth:1200px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    a{color:inherit;text-decoration:none}
+    header{
+      position:fixed;left:0;right:0;top:0;z-index:50;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:14px 28px;background:linear-gradient(to bottom, rgba(255,255,255,0.95), rgba(255,255,255,0.6));
+      border-bottom:1px solid rgba(0,0,0,0.04);
+      backdrop-filter: blur(6px);
+    }
+    .logo{font-weight:700;color:var(--text);display:flex;gap:10px;align-items:center}
+    .logo .mark{font-size:20px}
+    nav{display:flex;gap:18px;align-items:center}
+    nav a{font-weight:600;color:var(--text);font-size:15px}
+    .container{max-width:var(--maxwidth);margin:0 auto;padding:0 18px}
+
+    /* HERO */
+    .hero{
+      min-height:88vh;
+      display:grid;grid-template-columns:1fr 520px;align-items:center;
+      padding:120px 18px 60px;gap:36px;
+      max-width:var(--maxwidth);margin:0 auto;
+    }
+    .hero-left h1{
+      margin:0 0 14px;font-size:48px;line-height:1.02;
+      letter-spacing:-0.6px;
+    }
+    .hero-left p{margin:0 0 20px;color:var(--muted);font-size:18px}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:10px;
+      background:linear-gradient(90deg,var(--gold),var(--gold-2));color:#fff;font-weight:700;cursor:pointer;
+      border:0;box-shadow:0 10px 25px rgba(200,154,58,0.18);
+    }
+
+    /* right canvas / image card */
+    .hero-right{
+      border-radius:14px;overflow:hidden;box-shadow:0 20px 50px rgba(9,9,12,0.08);background:#fff;
+      display:flex;align-items:center;justify-content:center;padding:28px;
+      position:relative;
+    }
+    .camera-card{
+      width:100%;height:420px;display:flex;align-items:center;justify-content:center;
+      background-image:url('https://picsum.photos/seed/camera/1200/800');background-size:cover;background-position:center;
+      border-radius:10px;box-shadow: inset 0 0 0 1px rgba(0,0,0,0.03);
+    }
+    .camera-card::after{
+      content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(255,255,255,0.0), rgba(255,255,255,0.0));
+      pointer-events:none;
+    }
+
+    /* About */
+    section {padding:72px 18px}
+    .section-title{max-width:var(--maxwidth);margin:0 auto 28px;padding:0 18px;display:flex;align-items:center;justify-content:space-between}
+    .section-title h2{margin:0;font-size:28px}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:var(--maxwidth);margin:0 auto;padding:0 18px}
+    .about-text{background:#fff;padding:22px;border-radius:12px;box-shadow:0 8px 30px rgba(15,15,15,0.04)}
+    .team-cards{display:flex;gap:16px;flex-wrap:wrap}
+
+    .team-card{flex:1 1 160px;background:white;padding:14px;border-radius:10px;border:1px solid rgba(0,0,0,0.04);
+      box-shadow:0 8px 30px rgba(8,8,8,0.03);display:flex;gap:12px;align-items:center}
+    .team-card img{width:60px;height:60px;border-radius:10px;object-fit:cover}
+    .team-card .meta{display:flex;flex-direction:column}
+    .team-card .meta strong{font-size:15px}
+    .team-card .meta span{font-size:13px;color:var(--muted)}
+
+    /* Services list 14 neat */
+    .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:var(--maxwidth);margin:0 auto;padding:0 18px}
+    .svc{background:#fff;padding:18px;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,0.04);border-left:4px solid var(--gold)}
+    .svc h4{margin:0 0 6px}
+    .svc p{margin:0;color:var(--muted)}
+
+    /* Why choose me - paragraphs */
+    .why-grid{max-width:var(--maxwidth);margin:0 auto;padding:0 18px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .why p{background:#fff;padding:18px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.04);line-height:1.6}
+
+    
+     /* Gallery Honeycomb */
+    .gallery {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      background: white;
+    }
+
+    .hex-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      justify-items: center;
+      max-width: 1200px;
+    }
+
+    .hex {
+      width: 150px;
+      height: 130px;
+      background: rgb(18, 18, 18);
+      clip-path: polygon(
+        25% 5%, 75% 5%, 
+        100% 50%, 
+        75% 95%, 25% 95%, 
+        0% 50%
+      );
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.3s;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .hex img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hex:hover {
+      transform: scale(1.08);
+    }
+  
+
+
+    /* Contact */
+    .contact-grid{display:grid;grid-template-columns:1fr 420px;gap:20px;max-width:var(--maxwidth);margin:0 auto;padding:0 18px 120px}
+    .contact-form{background:#fff;padding:20px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.05)}
+    .contact-form input,.contact-form textarea{width:100%;padding:12px;margin-bottom:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.08)}
+    .contact-form button{background:linear-gradient(90deg,var(--gold),var(--gold-2));color:#fff;padding:12px 18px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
+
+    /* Footer */
+    footer{padding:28px 18px;text-align:center;color:var(--muted);border-top:1px solid rgba(0,0,0,0.03)}
+
+    /* responsiveness */
+    @media(max-width:980px){
+      .hero{grid-template-columns:1fr; padding-top:100px}
+      .hero-right{order:2}
+      .about-grid{grid-template-columns:1fr}
+      .services-grid{grid-template-columns:repeat(2,1fr)}
+      .why-grid{grid-template-columns:1fr}
+      .contact-grid{grid-template-columns:1fr}
+      .hex{width:120px;height:135px}
+    }
+    @media(max-width:560px){
+      nav{display:none}
+      .logo{font-size:18px}
+      .hero-left h1{font-size:28px}
+      .hero-left p{font-size:16px}
+    }
+
+    /* small helpers */
+    .muted{color:var(--muted)}
+    .center{display:flex;align-items:center;justify-content:center}
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo"><span class="mark">📸</span> <span>BOBBY Photography</span></div>
+    <nav>
+      <a href="#home" onclick="scrollToId(event,'home')">Home</a>
+      <a href="#about" onclick="scrollToId(event,'about')">About</a>
+      <a href="#services" onclick="scrollToId(event,'services')">Services</a>
+      <a href="#gallery" onclick="scrollToId(event,'gallery')">Gallery</a>
+      <a href="#contact" onclick="scrollToId(event,'contact')">Contact</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="hero-left container">
+      <h1>Frame your story with timeless photography.</h1>
+      <p class="lead">Not just pictures — memories crafted. Professional shoots for weddings, portraits, events and more. Book a session for creative, emotional and high-quality photos.</p>
+      <div style="display:flex;gap:14px;align-items:center">
+        <button class="btn" onclick="scrollToId(event,'gallery')">View My Work</button>
+        <a class="muted" href="#contact" onclick="scrollToId(event,'contact')" style="align-self:center">Book a Session</a>
+      </div>
+    </div>
+
+    <div class="hero-right container">
+      <div class="camera-card" title="Click to open gallery" onclick="scrollToId(null,'gallery')"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-title">
+      <h2>About Us</h2>
+      <div class="muted">CEO & Team — Passionate storytellers through images</div>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-text">
+        <h3>Bobby Photography</h3>
+        <p class="muted">Founded by Bobby, our team specializes in wedding, portrait and travel photography. We focus on capturing emotions and telling your story through vibrant, cinematic imagery. Our studio delivers high-quality editing, personalized shoots and a friendly experience.</p>
+        <p><strong>Why we exist:</strong> To make every moment feel eternal—photos that connect emotionally and look amazing.</p>
+      </div>
+
+      <div>
+        <div class="team-cards">
+          <!-- Team members (example 5) -->
+          <div class="team-card">
+            <img src="https://picsum.photos/seed/team1/200/200" alt="Bobby">
+            <div class="meta">
+              <strong>Bobby (CEO)</strong>
+              <span>Lead Photographer and vediographer</span>
+            </div>
+          </div>
+          <div class="team-card">
+            <img src="https://picsum.photos/seed/team2/200/200" alt="Anu">
+            <div class="meta">
+              <strong>preethi</strong>
+              <span>Assistant Photographer</span>
+            </div>
+          </div>
+          <div class="team-card">
+            <img src="https://picsum.photos/seed/team3/200/200" alt="Ravi">
+            <div class="meta">
+              <strong>akram</strong>
+              <span>Editor</span>
+            </div>
+          </div>
+          <div class="team-card">
+            <img src="https://picsum.photos/seed/team4/200/200" alt="Sana">
+            <div class="meta">
+              <strong>raghav</strong>
+              <span>photographer</span>
+            </div>
+          </div>
+          <div class="team-card">
+            <img src="https://picsum.photos/seed/team5/200/200" alt="Kiran">
+            <div class="meta">
+              <strong>Kiran</strong>
+              <span>Assistant photographer</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-title"><h2>Services</h2><div class="muted">Comprehensive & well-organized packages</div></div>
+
+    <div class="services-grid">
+      <div class="svc"><h4>1 • Wedding</h4><p>Pre-wedding, Post-wedding shoots; full ceremony coverage.</p></div>
+      <div class="svc"><h4>2 • Birthday Shoots</h4><p>Pre & Post celebration coverage, candid moments.</p></div>
+      <div class="svc"><h4>3 • Event Photography</h4><p>Corporate & personal events, conferences, launches.</p></div>
+      <div class="svc"><h4>4 • Baby & Maternity</h4><p>Newborn sessions, maternity shoots at home or studio.</p></div>
+      <div class="svc"><h4>5 • Outdoor / Landscape</h4><p>Nature, travel and location portraits with golden-hour expertise.</p></div>
+      <div class="svc"><h4>6 • Fashion</h4><p>Lookbooks, editorial and portfolio shoots for models/designers.</p></div>
+      <div class="svc"><h4>7 • Travel Photography</h4><p>Destination shoots and photo stories for blogs and magazines.</p></div>
+      <div class="svc"><h4>8 • Product Shoots</h4><p>Studio product photography for e-commerce & catalogs.</p></div>
+      <div class="svc"><h4>9 • Family Portraits</h4><p>Studio or outdoor family portraits with natural poses.</p></div>
+      <div class="svc"><h4>10 • Food Photography</h4><p>Styled food images for restaurants & menus.</p></div>
+      <div class="svc"><h4>11 • Architectural</h4><p>Interiors & exteriors for architects and realtors.</p></div>
+      <div class="svc"><h4>12 • Commercial</h4><p>Brand campaigns, product launches and corporate visuals.</p></div>
+      <div class="svc"><h4>13 • Drone / Aerial</h4><p>Stunning aerial shots for real estate and events.</p></div>
+      <div class="svc"><h4>14 • Cinematic Reels</h4><p>Short video reels and cinematic highlight films.</p></div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE ME (4 paragraphs) -->
+  <section id="why">
+    <div class="section-title"><h2>Why Choose Bobby Photography</h2><div class="muted">We don't just click — we craft.</div></div>
+    <div class="why-grid container">
+      <div class="why">
+        <p><strong>Emotion-first storytelling:</strong> Our photographs focus on feelings — joy, quiet intimacy, and candid laughter. We direct scenes gently, letting authentic moments emerge so your photos feel personal and timeless.</p>
+      </div>
+      <div class="why">
+        <p><strong>Fine art editing:</strong> Every image goes through careful color grading and retouching to create cinematic tones. Our editing enhances mood while keeping the subjects natural and true-to-life.</p>
+      </div>
+      <div class="why">
+        <p><strong>Professional workflow:</strong> From pre-shoot planning to final delivery, we maintain timely communication, clear pricing, and fast turnaround. You receive high-resolution images ready for prints and social sharing.</p>
+      </div>
+      <div class="why">
+        <p><strong>Tailored experience:</strong> We design each session to match your personality and vision — whether candid wedding moments, stylized fashion shoots, or family portraits that feel like home.</p>
+      </div>
+    </div>
+  </section>
+  <section class="gallery">
+  <div class="hex-grid">
+    <div class="hex"><img src="images/photo1.jpg" alt=""></div>
+    <div class="hex"><img src="images/photo2.jpg" alt=""></div>
+    <div class="hex"><img src="images/photo3.jpg" alt=""></div>
+    <div class="hex"><img src="images/photo4.jpg" alt=""></div>
+    <div class="hex"><img src="images/photo5.jpg" alt=""></div>
+    <div class="hex"><img src="images/photo6.jpg" alt=""></div>
+    <div class="hex"><img src="images/photo7.jpg" alt=""></div>
+    <div class="hex"><img src="images/photo8.jpg" alt=""></div>
+    <div class="hex"><img src="images/photo9.jpg" alt=""></div>
+    <div class="hex"><img src="images/photo10.jpg" alt=""></div>
+    <div class="hex"><img src="images/photo11.jpg" alt=""></div>
+    <div class="hex"><img src="images/photo12.jpg" alt=""></div>
+    <div class="hex"><img src="images/photo13.jpg" alt=""></div>
+    <div class="hex"><img src="images/photo14.jpg" alt=""></div>
+    <div class="hex"><img src="images/photo15.jpg" alt=""></div>
+    <div class="hex"><img src="images/photo16.jpg" alt=""></div>
+    <div class="hex"><img src="images/photo17.jpg" alt=""></div>
+    <div class="hex"><img src="images/photo18.jpg" alt=""></div>
+    <div class="hex"><img src="images/photo19.jpg" alt=""></div>
+    <div class="hex"><img src="images/photo20.jpg" alt=""></div>
+    <div class="hex"><img src="images/photo21.jpg" alt=""></div>
+    <div class="hex"><img src="images/photo22.jpg" alt=""></div>
+    <div class="hex"><img src="images/photo23.jpg" alt=""></div>
+    <div class="hex"><img src="images/photo24.jpg" alt=""></div>
+    <div class="hex"><img src="images/photo25.jpg" alt=""></div>
+    <div class="hex"><img src="images/photo26.jpg" alt=""></div>
+    <div class="hex"><img src="images/photo27.jpg" alt=""></div>
+    <div class="hex"><img src="images/photo28.jpg" alt=""></div>
+    <div class="hex"><img src="images/photo29.jpg" alt=""></div>
+    <div class="hex"><img src="images/photo30.jpg" alt=""></div>
+    
+    
+    <!-- continue up to 30 -->
+  </div>
+</section>
+
+
+  
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-title"><h2>Contact</h2><div class="muted">Book sessions or say hello</div></div>
+
+    <div class="contact-grid">
+      <div class="contact-form">
+        <form id="contactForm" onsubmit="submitContact(event)">
+          <input type="text" id="name" placeholder="Your name" required />
+          <input type="email" id="email" placeholder="Your email" required />
+          <textarea id="message" rows="6" placeholder="Your message" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+        <div id="formMsg" style="margin-top:10px;color:green;display:none">Message sent (demo). We'll contact you soon.</div>
+      </div>
+
+      <div style="border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.05)">
+        <!-- Google Maps embed - Hyderabad example -->
+         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3814.9875692063615!2d81.7903676736797!3d17.02427981316699!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a37a3e5b553be63%3A0xc2c6fc7e163ab238!2sCTRI%20Rd%2C%20Rajamahendravaram%2C%20Andhra%20Pradesh%20533105!5e0!3m2!1sen!2sin!4v1756549427759!5m2!1sen!2sin" 
+        
+          width="100%" height="100%" style="border:0;min-height:320px" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © <span id="yr"></span> Bobby Photography — All rights reserved · Follow us on socials.
+  </footer>
+
+  <script>
+    // small helpers
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // smooth scroll helper
+    function scrollToId(e, id){
+      if(e) e.preventDefault();
+      const el = document.getElementById(id);
+      if(!el) return;
+      el.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+
+   
+
+    // contact form demo
+    function submitContact(e){
+      e.preventDefault();
+      // demo: show message and reset
+      document.getElementById('formMsg').style.display='block';
+      setTimeout(()=>{ document.getElementById('formMsg').style.display='none'; }, 4000);
+      document.getElementById('contactForm').reset();
+    }
+
+    // lazy load improvement: ensure images load after page interactive
+    window.addEventListener('load', ()=> {
+      const imgs = document.querySelectorAll('.hex img');
+      imgs.forEach(img=>{
+        // trigger loading if not loaded (picsum handles)
+        if(!img.complete) {
+          img.onload = ()=>{};
+        }
+      });
+    });
+  </script>
+</body>
+</html>
